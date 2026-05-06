@@ -1,0 +1,151 @@
+# Dependencias
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Archivos de entorno
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Base de datos local
+*.sqlite
+*.db
+*.db-journal
+
+# Logs
+logs/
+*.log
+backend/logs/
+frontend/logs/
+
+# Archivos de sistema operativo
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# IDE y editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-workspace
+*.sublime-project
+
+# Docker
+docker-compose.override.yml
+*.pid
+*.pid.lock
+
+# Build y distribución
+dist/
+build/
+out/
+*.tgz
+*.tar.gz
+
+# Backend - Node.js
+backend/node_modules/
+backend/package-lock.json
+backend/yarn.lock
+backend/.env
+backend/.env.local
+backend/.env.*.local
+backend/logs/
+backend/dist/
+backend/build/
+backend/coverage/
+backend/.nyc_output/
+
+# Frontend - React
+frontend/node_modules/
+frontend/package-lock.json
+frontend/yarn.lock
+frontend/build/
+frontend/dist/
+frontend/coverage/
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# Testing
+coverage/
+.nyc_output/
+*.test.js
+*.spec.js
+__tests__/
+__mocks__/
+
+# Archivos temporales
+*.tmp
+*.temp
+*.cache
+.cache/
+tmp/
+temp/
+
+# Backup de archivos Docker (cuando se editan dentro del contenedor)
+*~
+*.bak
+*.backup
+
+# Archivos específicos del proyecto (no subir datos sensibles)
+backend/config/local.js
+backend/config/*.local.js
+frontend/src/config/local.js
+
+# Volúmenes de Docker (no subir)
+postgres_data/
+mysql_data/
+redis_data/
+
+# Informes y documentos generados
+*.pdf
+*.docx
+reports/
+docs/api/
+
+# Archivos de usuario
+*.pem
+*.key
+*.crt
+*.cert
+*.p12
+secrets/
+keys/
+
+# Windows
+*.exe
+*.dll
+*.so
+*.dylib
+
+# MacOS
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+*.pid
+*.socket
+
+# Ocultar scripts temporales o de prueba
+test_*.sh
+temp_*.js
+debug_*.js

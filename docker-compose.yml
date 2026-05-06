@@ -1,0 +1,64 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: techstore_db
+    environment:
+      POSTGRES_USER: techstore
+      POSTGRES_PASSWORD: techstore123
+      POSTGRES_DB: techstore_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - techstore_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U techstore"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    container_name: techstore_backend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=techstore
+      - DB_PASSWORD=techstore123
+      - DB_NAME=techstore_db
+      - JWT_SECRET=techstore_jwt_secret_key_2026
+      - JWT_EXPIRES_IN=24h
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - techstore_network
+
+  frontend:
+    build: ./frontend
+    container_name: techstore_frontend
+    ports:
+      - "3001:3001"
+    environment:
+      - REACT_APP_API_URL=http://localhost:3000
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - techstore_network
+
+volumes:
+  postgres_data:
+
+networks:
+  techstore_network:
+    driver: bridge
