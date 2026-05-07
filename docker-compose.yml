@@ -13,7 +13,7 @@ services:
     networks:
       - techstore_network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U techstore"]
+      test: ["CMD-SHELL", "pg_isready -U techstore -d techstore_db"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -32,6 +32,11 @@ services:
       - DB_NAME=techstore_db
       - JWT_SECRET=techstore_jwt_secret_key_2026
       - JWT_EXPIRES_IN=24h
+      # Configuración Mailtrap para MFA por email
+      - EMAIL_HOST=sandbox.smtp.mailtrap.io
+      - EMAIL_PORT=2525
+      - EMAIL_USER=9add65e08ced37
+      - EMAIL_PASS=f68cec3f5b7a5b
     depends_on:
       postgres:
         condition: service_healthy

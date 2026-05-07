@@ -64,6 +64,11 @@ INSERT INTO tiendas (nombre, ubicacion) VALUES
 ('TechStore Cusco', 'Cusco, Perú')
 ON CONFLICT DO NOTHING;
 
+-- Crear usuario admin
+INSERT INTO usuarios (email, password_hash, nombre_completo, tienda_id)
+VALUES ('admin@techstore.com', '$2a$10$rQZC5xZ5xZ5xZ5xZ5xZ5xOuZ5xZ5xZ5xZ5xZ5xZ5xZ5xZ5xZ5x', 'Administrador Sistema', 1)
+ON CONFLICT DO NOTHING;
+
 -- Asignar rol Admin al usuario admin
 INSERT INTO usuario_roles (usuario_id, rol_id, asignado_por)
 SELECT u.id, r.id, u.id

@@ -2,9 +2,10 @@ const speakeasy = require('speakeasy');
 const QRCode = require('qrcode');
 const nodemailer = require('nodemailer');
 
-// Configurar email para MFA
+// Configurar transporter usando variables de entorno (compatible con Mailtrap y Gmail)
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: process.env.EMAIL_HOST,
+    port: parseInt(process.env.EMAIL_PORT) || 2525,
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
@@ -58,12 +59,12 @@ const sendMFACodeByEmail = async (email, code) => {
             <p>Si no solicitaste este código, ignora este mensaje.</p>
         `
     };
-    
+
     await transporter.sendMail(mailOptions);
     return true;
 };
 
-// Almacenar códigos MFA temporalmente
+// Almacenar códigos MFA temporalmente en memoria
 const mfaCodes = new Map();
 
 const storeMFACode = (userId, code) => {
